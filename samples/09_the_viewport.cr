@@ -4,16 +4,20 @@ require "../src/image"
 SDL.init(SDL::Init::VIDEO)
 at_exit { SDL.quit }
 
+SDL::IMG.init(SDL::IMG::Init::PNG)
+at_exit { SDL::IMG.quit }
+
 window = SDL::Window.new("SDL tutorial", 640, 480)
 renderer = SDL::Renderer.new(window)
 
-width, height = window.size
-png = SDL::IMG.load(File.join(__DIR__, "data", "loaded.png"), renderer)
+png = SDL::IMG.load(File.join(__DIR__, "data", "09_the_viewport", "viewport.png"), renderer)
 
 loop do
-  case event = SDL::Event.wait
+  case (event = SDL::Event.wait)
   when SDL::Event::Quit
     break
+  when SDL::Event::Keyboard
+    break if event.keyup? && event.sym.q?
   end
 
   # clear sreen in white

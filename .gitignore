@@ -1,2 +1,3 @@
 /doc
-/samples/data
+/lib
+shard.lock

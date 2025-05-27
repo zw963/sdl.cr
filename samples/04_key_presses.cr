@@ -1,4 +1,4 @@
-require "../sdl"
+require "../src/sdl"
 
 SDL.init(SDL::Init::VIDEO)
 at_exit { SDL.quit }
@@ -6,17 +6,17 @@ at_exit { SDL.quit }
 window = SDL::Window.new("SDL tutorial", 640, 480)
 
 surfaces = {
-  default: SDL.load_bmp(File.join(__DIR__, "data", "press.bmp")),
-  up: SDL.load_bmp(File.join(__DIR__, "data", "up.bmp")),
-  down: SDL.load_bmp(File.join(__DIR__, "data", "down.bmp")),
-  left: SDL.load_bmp(File.join(__DIR__, "data", "left.bmp")),
-  right: SDL.load_bmp(File.join(__DIR__, "data", "right.bmp")),
+  default: SDL.load_bmp(File.join(__DIR__, "data", "04_key_presses", "press.bmp")),
+  up:      SDL.load_bmp(File.join(__DIR__, "data", "04_key_presses", "up.bmp")),
+  down:    SDL.load_bmp(File.join(__DIR__, "data", "04_key_presses", "down.bmp")),
+  left:    SDL.load_bmp(File.join(__DIR__, "data", "04_key_presses", "left.bmp")),
+  right:   SDL.load_bmp(File.join(__DIR__, "data", "04_key_presses", "right.bmp")),
 }
 
 bmp = surfaces[:default]
 
 loop do
-  case event = SDL::Event.wait
+  case (event = SDL::Event.wait)
   when SDL::Event::Quit
     break
   when SDL::Event::Keyboard

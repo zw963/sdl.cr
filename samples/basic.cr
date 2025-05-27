@@ -1,4 +1,4 @@
-require "../sdl"
+require "../src/sdl"
 
 SDL.init(SDL::Init::VIDEO)
 at_exit { SDL.quit }
@@ -12,9 +12,7 @@ loop do
   when SDL::Event::Quit
     break
   when SDL::Event::Keyboard
-    if event.mod.lctrl? && event.sym.q?
-      break
-    end
+    break if event.mod.lctrl? && event.sym.q?
   end
 
   window.surface.fill(255, 255, 255)
