@@ -1,11 +1,8 @@
 require "../src/sdl"
 require "../src/image"
 
-SDL.init(SDL::Init::VIDEO)
-at_exit { SDL.quit }
-
-SDL::IMG.init(SDL::IMG::Init::PNG)
-at_exit { SDL::IMG.quit }
+SDL.init(SDL::Init::VIDEO); at_exit { SDL.quit }
+SDL::IMG.init(SDL::IMG::Init::PNG); at_exit { SDL::IMG.quit }
 
 SDL.set_hint(SDL::Hint::RENDER_SCALE_QUALITY, "1")
 window = SDL::Window.new("SDL tutorial", 640, 480)

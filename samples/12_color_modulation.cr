@@ -7,14 +7,16 @@ SDL::IMG.init(SDL::IMG::Init::PNG); at_exit { SDL::IMG.quit }
 window = SDL::Window.new("SDL tutorial", 640, 480)
 renderer = SDL::Renderer.new(window)
 
-image = SDL::IMG.load(File.join(__DIR__, "data", "full.png"), renderer)
+image = SDL::IMG.load(File.join(__DIR__, "data", "12_color_modulation", "colors.png"), renderer)
 r = g = b = 255
 
 loop do
-  case event = SDL::Event.wait
+  case (event = SDL::Event.wait)
   when SDL::Event::Quit
     break
   when SDL::Event::Keyboard
+    break if event.mod.lctrl? && event.sym.q?
+
     case event.sym
     when .a?
       r += 32

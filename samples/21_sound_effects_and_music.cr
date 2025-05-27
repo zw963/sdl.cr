@@ -6,7 +6,7 @@ SDL.init(SDL::Init::VIDEO | SDL::Init::AUDIO); at_exit { SDL.quit }
 SDL::Mix.init(SDL::Mix::Init::FLAC); at_exit { SDL::Mix.quit }
 SDL::Mix.open
 
-DATA_DIR = File.join(__DIR__, "data")
+DATA_DIR = File.join(__DIR__, "data", "21_sound_effects_and_music")
 
 music = SDL::Mix::Music.new(File.join(DATA_DIR, "beat.wav"))
 
@@ -19,16 +19,18 @@ channels = {} of String => SDL::Mix::Channel
 end
 
 window = SDL::Window.new("SDL Tutorial", 640, 480)
-png = SDL::IMG.load(File.join(__DIR__, "data", "prompt.png"))
+png = SDL::IMG.load(File.join(DATA_DIR, "prompt.png"))
 png = png.convert(window.surface)
 activekey = [] of LibSDL::Keycode
 
 loop do
-  case event = SDL::Event.wait
+  case (event = SDL::Event.wait)
   when SDL::Event::Quit
     music.stop
     break
   when SDL::Event::Keyboard
+    break if event.mod.lctrl? && event.sym.q?
+
     key = event.sym
     unless activekey.includes? key
       case key

@@ -7,12 +7,12 @@ SDL::IMG.init(SDL::IMG::Init::PNG); at_exit { SDL::IMG.quit }
 window = SDL::Window.new("SDL tutorial", 640, 480)
 renderer = SDL::Renderer.new(window, SDL::Renderer::Flags::ACCELERATED | SDL::Renderer::Flags::PRESENTVSYNC)
 
-arrow = SDL::IMG.load(File.join(__DIR__, "data", "arrow.png"), renderer)
+arrow = SDL::IMG.load(File.join(__DIR__, "data", "15_rotation_and_flipping", "arrow.png"), renderer)
 degrees = 0
 flip = SDL::Renderer::Flip::NONE
 
 loop do
-  case event = SDL::Event.wait
+  case (event = SDL::Event.wait)
   when SDL::Event::Quit
     break
   when SDL::Event::Keyboard
@@ -28,8 +28,8 @@ loop do
   renderer.draw_color = SDL::Color[255, 255, 255, 255]
   renderer.clear
 
-  x = (window.width - arrow.width) / 2
-  y = (window.height - arrow.height) / 2
+  x = (window.width - arrow.width) // 2
+  y = (window.height - arrow.height) // 2
   renderer.copy(arrow, dstrect: SDL::Rect[x, y, arrow.width, arrow.height], angle: degrees, flip: flip)
 
   renderer.present
