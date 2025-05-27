@@ -11,20 +11,22 @@ SDL.set_hint(SDL::Hint::RENDER_SCALE_QUALITY, "1")
 window = SDL::Window.new("SDL tutorial", 640, 480)
 renderer = SDL::Renderer.new window
 
-background = SDL::IMG.load(File.join(__DIR__, "data", "background.png"), renderer)
+background = SDL::IMG.load(File.join(__DIR__, "data", "10_color_keying", "background.png"), renderer)
 
 # image has a colored background, declare the color as transparent:
-image = SDL::IMG.load(File.join(__DIR__, "data", "foo.png"))
+image = SDL::IMG.load(File.join(__DIR__, "data", "10_color_keying", "foo.png"))
 image.color_key = {0, 255, 255}
 foo = SDL::Texture.from(image, renderer)
 
 # image has a transparent background color (SDL_image sets the colorkey):
-#foo = IMG.load(File.join(__DIR__, "data", "foo2.png"), renderer)
+# foo = IMG.load(File.join(__DIR__, "data", "foo2.png"), renderer)
 
 loop do
-  case event = SDL::Event.poll
+  case (event = SDL::Event.poll)
   when SDL::Event::Quit
     break
+  when SDL::Event::Keyboard
+    break if event.mod.lctrl? && event.sym.q?
   end
 
   # clear sreen in white

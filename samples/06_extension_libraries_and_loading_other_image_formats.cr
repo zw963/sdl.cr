@@ -17,7 +17,7 @@ loop do
   when SDL::Event::Quit
     break
   when SDL::Event::Keyboard
-    break if event.keyup? && event.sym.q?
+    break if event.mod.lctrl? && event.sym.q?
   end
 
   png.blit(window.surface)

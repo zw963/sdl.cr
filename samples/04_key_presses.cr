@@ -29,7 +29,7 @@ loop do
       bmp = surfaces[:left]
     when .right?
       bmp = surfaces[:right]
-    when .q?
+    when event.mod.lctrl? && event.sym.q?
       break
     else
       bmp = surfaces[:default]

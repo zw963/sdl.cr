@@ -17,10 +17,10 @@ loop do
   when SDL::Event::Quit
     break
   when SDL::Event::Keyboard
-    break if event.keyup? && event.sym.q?
+    break if event.mod.lctrl? && event.sym.q?
   end
 
-  # clear sreen in white
+  # clear screen in white
   renderer.draw_color = SDL::Color[255, 255, 0, 255]
   renderer.clear
 

@@ -12,7 +12,7 @@ loop do
   when SDL::Event::Quit
     break
   when SDL::Event::Keyboard
-    break if event.keyup? && event.sym.q?
+    break if event.mod.lctrl? && event.sym.q?
   end
 
   bmp.blit_scaled(window.surface, dstrect: SDL::Rect[20, 20, 600, 440])
